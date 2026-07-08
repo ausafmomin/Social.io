@@ -3,9 +3,10 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>My Linktree | Connect & Explore</title>
+    <title>My Links</title>
+    <!-- Font Awesome for clean brand logos -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <style>
-        /* Modern Reset & Base Styling */
         * {
             box-sizing: border-box;
             margin: 0;
@@ -14,289 +15,314 @@
         }
 
         body {
-            background: #0a0a0c;
+            background-color: #000000;
             color: #ffffff;
             display: flex;
             flex-direction: column;
             align-items: center;
-            justify-content: flex-start;
             min-height: 100vh;
-            padding: 3rem 1.5rem;
-            overflow-x: hidden;
-            position: relative;
+            padding: 40px 20px;
         }
 
-        /* Subtle Ambient Background Glows */
-        body::before, body::after {
-            content: '';
-            position: absolute;
-            width: 300px;
-            height: 300px;
-            border-radius: 50%;
-            background: linear-gradient(45deg, #ff007f, #7f00ff);
-            filter: blur(120px);
-            opacity: 0.15;
-            z-index: -1;
-        }
-        body::before { top: 10%; left: 10%; }
-        body::after { bottom: 10%; right: 10%; }
-
-        /* Container */
         .container {
             width: 100%;
-            max-width: 500px;
+            max-width: 450px;
+            text-align: center;
+        }
+
+        /* Rectangular Logo Constraints */
+        .logo-container {
+            width: 100%;
+            max-height: 120px;
+            margin-bottom: 15px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            overflow: hidden;
+        }
+
+        .logo-container img {
+            max-width: 100%;
+            max-height: 120px;
+            object-fit: contain;
+        }
+
+        h1 {
+            font-size: 1.5rem;
+            font-weight: 600;
+            margin-bottom: 30px;
+            letter-spacing: 1px;
+            text-transform: uppercase;
+            text-shadow: 0 0 10px rgba(255, 255, 255, 0.3);
+        }
+
+        .links-stack {
             display: flex;
             flex-direction: column;
-            align-items: center;
-            gap: 1.5rem;
-        }
-
-        /* Profile Section */
-        .profile {
-            text-align: center;
-            margin-bottom: 1rem;
-        }
-
-        .avatar {
-            width: 96px;
-            height: 96px;
-            border-radius: 50%;
-            background: linear-gradient(45deg, #00f2fe, #4facfe);
-            padding: 3px;
-            box-shadow: 0 8px 24px rgba(0,0,0,0.5);
-            margin-bottom: 1rem;
-        }
-
-        .avatar img {
+            gap: 20px;
             width: 100%;
-            height: 100%;
-            border-radius: 50%;
-            object-fit: cover;
-            background: #121214;
         }
 
-        .username {
-            font-size: 1.5rem;
-            font-weight: 700;
-            letter-spacing: -0.5px;
-            margin-bottom: 0.25rem;
-            background: linear-gradient(to right, #fff, #a1a1aa);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-        }
-
-        .bio {
-            font-size: 0.9rem;
-            color: #8e8e93;
-        }
-
-        /* RGB Flowing Border Button Wrapper */
-        .rgb-link {
+        /* Flowing RGB Border Effect Container */
+        .rgb-btn-wrap {
             position: relative;
             width: 100%;
             border-radius: 12px;
-            padding: 2px; /* Sets border thickness */
-            background: linear-gradient(90deg, #ff007f, #7f00ff, #00f2fe, #ff007f);
-            background-size: 300% 100%;
-            animation: flowRGB 4s linear infinite;
-            text-decoration: none;
-            display: block;
-            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.4);
-            transition: transform 0.2s ease, box-shadow 0.2s ease;
-        }
-
-        @keyframes flowRGB {
-            0% { background-position: 0% 50%; }
-            100% { background-position: 300% 50%; }
-        }
-
-        /* Inside Button Content */
-        .btn-content {
-            background: #141417;
-            padding: 1rem 1.5rem;
-            border-radius: 10px; /* Slightly less than wrapper to fit perfectly */
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            gap: 0.75rem;
-            color: #ffffff;
-            font-weight: 600;
-            font-size: 1rem;
-            transition: background 0.2s ease;
-        }
-
-        /* Hover Interaction Effects */
-        .rgb-link:hover {
-            transform: translateY(-2px);
-            box-shadow: 0 8px 28px rgba(127, 0, 255, 0.3);
-        }
-
-        .rgb-link:hover .btn-content {
-            background: #1c1c21;
-        }
-
-        /* Custom Colors/Icons hints for Specific Platforms (Optional Enhancement) */
-        .youtube-btn { --glow-color: #ff0000; }
-        .instagram-btn { --glow-color: #e1306c; }
-        .facebook-btn { --glow-color: #1877f2; }
-        .instructables-btn { --glow-color: #ffc107; }
-
-        /* Dropdown Accordion Section */
-        .dropdown-container {
-            width: 100%;
-            background: #141417;
-            border: 1px solid #27272a;
-            border-radius: 12px;
+            padding: 3px; /* Size of the border */
+            background: linear-gradient(0deg, #000, #000); /* Fallback */
             overflow: hidden;
-            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.2);
+            display: block;
+            text-decoration: none;
+            cursor: pointer;
         }
 
-        .dropdown-trigger {
-            width: 100%;
-            padding: 1rem 1.5rem;
-            background: none;
-            border: none;
+        /* Moving RGB gradient background */
+        .rgb-btn-wrap::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: conic-gradient(
+                #ff0000, #ff7f00, #ffff00, #00ff00, #0000ff, #4b0082, #9400d3, #ff0000
+            );
+            animation: spin 4s linear infinite;
+            z-index: 1;
+        }
+
+        @keyframes spin {
+            100% { transform: rotate(360deg); }
+        }
+
+        /* Inner Button content masks the spinning center */
+        .rgb-btn-inner {
+            position: relative;
+            z-index: 2;
+            background-color: #0d0d0d;
             color: #ffffff;
-            font-weight: 600;
-            font-size: 1rem;
+            padding: 16px 24px;
+            border-radius: 9px; /* Slightly lower radius to match parent */
             display: flex;
             align-items: center;
-            justify-content: space-between;
-            cursor: pointer;
-            transition: background 0.2s;
+            transition: background-color 0.3s;
         }
 
-        .dropdown-trigger:hover {
-            background: #1c1c21;
+        .rgb-btn-wrap:hover .rgb-btn-inner {
+            background-color: #151515;
         }
 
-        .dropdown-icon {
+        .rgb-btn-inner i {
+            font-size: 1.3rem;
+            width: 30px;
+            text-align: left;
+        }
+
+        /* Branding Colors for the Icons */
+        .fa-youtube { color: #ff0000; }
+        .fa-instagram { color: #e1306c; }
+        .fa-facebook { color: #1877f2; }
+        .fa-lightbulb { color: #ff9900; } /* Fallback icon for Instructables */
+
+        .btn-text {
+            flex-grow: 1;
+            text-align: center;
+            font-weight: 500;
+            font-spacing: 0.5px;
+        }
+
+        .fa-chevron-down {
+            font-size: 0.9rem !important;
+            width: auto !important;
             transition: transform 0.3s ease;
         }
 
-        /* Video List Panel */
-        .dropdown-panel {
+        /* Dropdown Specific Styles */
+        .dropdown-container {
+            width: 100%;
+            position: relative;
+        }
+
+        .dropdown-menu {
             max-height: 0;
             overflow: hidden;
-            transition: max-height 0.3s ease-out;
-            background: #0d0d0f;
+            transition: max-height 0.4s ease-out;
             display: flex;
             flex-direction: column;
+            gap: 8px;
+            margin-top: 8px;
+            padding: 0 5px;
+        }
+
+        .dropdown-container.active .dropdown-menu {
+            max-height: 300px;
+            overflow-y: auto;
+        }
+
+        .dropdown-container.active .fa-chevron-down {
+            transform: rotate(180deg);
         }
 
         .video-item {
-            padding: 0.85rem 1.5rem;
-            border-top: 1px solid #1c1c21;
-            color: #d4d4d8;
+            background: #111;
+            border: 1px solid #222;
+            padding: 12px;
+            border-radius: 8px;
+            color: #ccc;
             text-decoration: none;
+            text-align: left;
             font-size: 0.9rem;
             display: flex;
-            align-items: center;
-            justify-content: space-between;
-            transition: background 0.2s, color 0.2s;
+            flex-direction: column;
+            gap: 4px;
+            transition: all 0.2s;
         }
 
         .video-item:hover {
-            background: #141417;
-            color: #00f2fe;
+            background: #1c1c1c;
+            color: #fff;
+            border-color: #444;
         }
 
-        .video-meta {
+        .video-date {
             font-size: 0.75rem;
-            color: #71717a;
-            background: #1c1c21;
-            padding: 2px 6px;
-            border-radius: 4px;
+            color: #666;
         }
 
-        /* Active/Open State classes handled by JS */
-        .dropdown-container.is-open .dropdown-icon {
-            transform: rotate(180deg);
+        /* Scrollbar styling for the dropdown list */
+        .dropdown-menu::-webkit-scrollbar {
+            width: 6px;
+        }
+        .dropdown-menu::-webkit-scrollbar-track {
+            background: #000;
+        }
+        .dropdown-menu::-webkit-scrollbar-thumb {
+            background: #333;
+            border-radius: 3px;
         }
     </style>
 </head>
 <body>
 
     <div class="container">
-       
-        <!-- Profile header -->
-        <div class="profile">
-            <div class="avatar">
-                <!-- Replace with your own profile image link -->
-                <img src="https://via.placeholder.com/150" alt="Profile Avatar">
-            </div>
-            <h1 class="username">@YourName</h1>
-            <p class="bio">Creator • Maker • Developer</p>
+        
+        <!-- Rectangular Logo Section -->
+        <div class="logo-container">
+            <img src="https://via.placeholder.com/400x100?text=YOUR+LOGO" alt="Logo">
         </div>
 
-        <!-- Social Links with RGB Flowing Borders -->
-        <a href="https://youtube.com" target="_blank" class="rgb-link youtube-btn">
-            <div class="btn-content">
-                <span>YouTube Channel</span>
-            </div>
-        </a>
+        <!-- Title Heading -->
+        <h1>Dr. Electronics</h1>
 
-        <a href="https://instagram.com" target="_blank" class="rgb-link instagram-btn">
-            <div class="btn-content">
-                <span>Instagram</span>
-            </div>
-        </a>
+        <!-- Buttons Stack -->
+        <div class="links-stack">
 
-        <a href="https://facebook.com" target="_blank" class="rgb-link facebook-btn">
-            <div class="btn-content">
-                <span>Facebook</span>
-            </div>
-        </a>
+            <!-- Button 1: YouTube -->
+            <a href="https://youtube.com" target="_blank" class="rgb-btn-wrap">
+                <div class="rgb-btn-inner">
+                    <i class="fab fa-youtube"></i>
+                    <span class="btn-text">YouTube</span>
+                </div>
+            </a>
 
-        <a href="https://instructables.com" target="_blank" class="rgb-link instructables-btn">
-            <div class="btn-content">
-                <span>Instructables Profile</span>
-            </div>
-        </a>
+            <!-- Button 2: Instagram -->
+            <a href="https://instagram.com" target="_blank" class="rgb-btn-wrap">
+                <div class="rgb-btn-inner">
+                    <i class="fab fa-instagram"></i>
+                    <span class="btn-text">Instagram</span>
+                </div>
+            </a>
 
-        <!-- Dynamic Chronological YouTube Dropdown Component -->
-        <div class="dropdown-container">
-            <button class="dropdown-trigger" onclick="toggleDropdown()">
-                <span>YouTube Video Archive</span>
-                <span class="dropdown-icon">▼</span>
-            </button>
-            <div id="videoPanel" class="dropdown-panel">
-                <!-- Video items structured in descending release sequence (latest first) -->
-                <a href="YOUR_VIDEO_URL_1" target="_blank" class="video-item">
-                    <span>1. Title of Your Most Recent Video</span>
-                    <span class="video-meta">Latest</span>
-                </a>
-                <a href="YOUR_VIDEO_URL_2" target="_blank" class="video-item">
-                    <span>2. Title of Your Second Video</span>
-                    <span class="video-meta">Video #2</span>
-                </a>
-                <a href="YOUR_VIDEO_URL_3" target="_blank" class="video-item">
-                    <span>3. Title of Your Third Video</span>
-                    <span class="video-meta">Video #3</span>
-                </a>
-                <a href="YOUR_VIDEO_URL_4" target="_blank" class="video-item">
-                    <span>4. Title of Your Oldest Video</span>
-                    <span class="video-meta">Video #4</span>
-                </a>
+            <!-- Button 3: Facebook -->
+            <a href="https://facebook.com" target="_blank" class="rgb-btn-wrap">
+                <div class="rgb-btn-inner">
+                    <i class="fab fa-facebook"></i>
+                    <span class="btn-text">Facebook</span>
+                </div>
+            </a>
+
+            <!-- Button 4: Instructables -->
+            <a href="https://www.instructables.com" target="_blank" class="rgb-btn-wrap">
+                <div class="rgb-btn-inner">
+                    <i class="fas fa-lightbulb"></i>
+                    <span class="btn-text">Instructables</span>
+                </div>
+            </a>
+
+            <!-- Button 5: Dropdown Menu with Live Feed -->
+            <div class="dropdown-container" id="yt-dropdown-container">
+                <div class="rgb-btn-wrap" onclick="toggleDropdown()">
+                    <div class="rgb-btn-inner">
+                        <i class="fab fa-youtube"></i>
+                        <span class="btn-text" id="dropdown-label">Latest Videos</span>
+                        <i class="fas fa-chevron-down"></i>
+                    </div>
+                </div>
+                <div class="dropdown-menu" id="video-list">
+                    <!-- Fetched video elements will append here dynamically -->
+                    <div class="video-item" style="text-align:center;">Loading videos...</div>
+                </div>
             </div>
+
         </div>
-
     </div>
 
     <script>
+        // Toggle the active state of the drop-down menu
         function toggleDropdown() {
-            const container = document.querySelector('.dropdown-container');
-            const panel = document.getElementById('videoPanel');
-           
-            if (container.classList.contains('is-open')) {
-                container.classList.remove('is-open');
-                panel.style.maxHeight = null;
-            } else {
-                container.classList.add('is-open');
-                // Sets precise maximum height dynamically to smoothly slide open
-                panel.style.maxHeight = panel.scrollHeight + "px";
+            document.getElementById('yt-dropdown-container').classList.toggle('active');
+        }
+
+        // Fetch YouTube videos via public RSS feed converted to JSON
+        async function fetchLatestVideos() {
+            // REPLACE THIS CHANNEL ID WITH YOUR ACTUAL YOUTUBE CHANNEL ID
+            const channelId = 'UCeYK_1_l_u_6T6bM6mH25wA'; 
+            const rssUrl = `https://www.youtube.com/feeds/videos.xml?channel_id=${channelId}`;
+            
+            // Using a free, reliable open-source feed parser proxy for client-side execution
+            const rss2jsonApi = `https://api.rss2json.com/v1/api.json?rss_url=${encodeURIComponent(rssUrl)}`;
+
+            const container = document.getElementById('video-list');
+
+            try {
+                const response = await fetch(rss2jsonApi);
+                const data = await response.json();
+
+                if (data.status === 'ok' && data.items.length > 0) {
+                    container.innerHTML = ''; // Wipe loading message
+
+                    // RSS2JSON naturally returns them sorted by release date descending
+                    data.items.forEach(video => {
+                        const videoLink = video.link;
+                        const videoTitle = video.title;
+                        
+                        // Human-friendly date formatting
+                        const pubDate = new Date(video.pubDate);
+                        const formattedDate = pubDate.toLocaleDateString(undefined, { 
+                            year: 'numeric', 
+                            month: 'short', 
+                            day: 'numeric' 
+                        });
+
+                        const itemHtml = `
+                            <a href="${videoLink}" target="_blank" class="video-item">
+                                <span>${videoTitle}</span>
+                                <span class="video-date">Released: ${formattedDate}</span>
+                            </a>
+                        `;
+                        container.innerHTML += itemHtml;
+                    });
+                } else {
+                    container.innerHTML = '<div class="video-item" style="text-align:center;">No videos found.</div>';
+                }
+            } catch (error) {
+                console.error('Error fetching YouTube RSS feed:', error);
+                container.innerHTML = '<div class="video-item" style="text-align:center; color:#ff4444;">Failed to load videos.</div>';
             }
         }
+
+        // Initialize fetching on page load
+        window.onload = fetchLatestVideos;
     </script>
 </body>
 </html>
