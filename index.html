@@ -3,141 +3,167 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>My Links</title>
+    <title>Dr. Electronics | Links</title>
+    <!-- Google Fonts for professional high-end sans-serif -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
     <!-- Font Awesome for clean brand logos -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
     <style>
         * {
             box-sizing: border-box;
             margin: 0;
             padding: 0;
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            font-family: 'Plus Jakarta Sans', sans-serif;
         }
 
         body {
-            background-color: #000000;
+            background-color: #030406;
             color: #ffffff;
             display: flex;
             flex-direction: column;
             align-items: center;
             min-height: 100vh;
-            padding: 40px 20px;
+            padding: 50px 20px;
+            position: relative;
+            overflow-x: hidden;
+        }
+
+        /* Fixed Background Canvas Setup */
+        #pcb-canvas {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: 0;
+            pointer-events: none;
         }
 
         .container {
             width: 100%;
-            max-width: 450px;
+            max-width: 440px;
             text-align: center;
+            z-index: 1;
+            position: relative;
         }
 
-        /* Rectangular Logo Constraints */
+        /* Beautifully rounded logo frame */
         .logo-container {
             width: 100%;
-            max-height: 120px;
-            margin-bottom: 15px;
+            max-height: 130px;
+            margin-bottom: 24px;
             display: flex;
             justify-content: center;
             align-items: center;
             overflow: hidden;
+            border-radius: 24px;
+            border: 1px solid rgba(255, 255, 255, 0.08);
+            background: rgba(10, 11, 16, 0.96);
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.85);
+            padding: 12px;
+            backdrop-filter: blur(10px);
         }
 
         .logo-container img {
             max-width: 100%;
-            max-height: 120px;
+            max-height: 106px;
             object-fit: contain;
+            border-radius: 14px;
         }
 
         h1 {
-            font-size: 1.5rem;
-            font-weight: 600;
-            margin-bottom: 30px;
-            letter-spacing: 1px;
+            font-size: 1.65rem;
+            font-weight: 700;
+            margin-bottom: 35px;
+            letter-spacing: 1.5px;
             text-transform: uppercase;
-            text-shadow: 0 0 10px rgba(255, 255, 255, 0.3);
+            background: linear-gradient(135deg, #ffffff 40%, #8a94a6 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            text-shadow: 0 4px 12px rgba(0,0,0,0.5);
         }
 
         .links-stack {
             display: flex;
             flex-direction: column;
-            gap: 20px;
+            gap: 18px;
             width: 100%;
         }
 
-        /* Flowing RGB Border Effect Container */
-        .rgb-btn-wrap {
+        /* Continuous Dynamic Border Gradient Animation */
+        .glow-btn-wrap {
             position: relative;
             width: 100%;
-            border-radius: 12px;
-            padding: 3px; /* Size of the border */
-            background: linear-gradient(0deg, #000, #000); /* Fallback */
-            overflow: hidden;
-            display: block;
+            border-radius: 16px;
+            padding: 2px; 
             text-decoration: none;
+            display: block;
             cursor: pointer;
+            overflow: hidden;
+            background: linear-gradient(90deg, #ff0055, #7a00ff, #00e5ff, #00ff66, #ff9900, #ff0055);
+            background-size: 400% 400%;
+            animation: continuousGlowGradient 8s linear infinite;
+            box-shadow: 0 0 15px rgba(0, 229, 255, 0.25);
+            transition: transform 0.25s cubic-bezier(0.2, 0.8, 0.2, 1);
         }
 
-        /* Moving RGB gradient background */
-        .rgb-btn-wrap::before {
-            content: '';
-            position: absolute;
-            top: -50%;
-            left: -50%;
-            width: 200%;
-            height: 200%;
-            background: conic-gradient(
-                #ff0000, #ff7f00, #ffff00, #00ff00, #0000ff, #4b0082, #9400d3, #ff0000
-            );
-            animation: spin 4s linear infinite;
-            z-index: 1;
+        @keyframes continuousGlowGradient {
+            0% { background-position: 0% 50%; box-shadow: 0 0 15px rgba(255, 0, 85, 0.3); }
+            50% { background-position: 100% 50%; box-shadow: 0 0 20px rgba(0, 229, 255, 0.35); }
+            100% { background-position: 0% 50%; box-shadow: 0 0 15px rgba(255, 0, 85, 0.3); }
         }
 
-        @keyframes spin {
-            100% { transform: rotate(360deg); }
+        .glow-btn-wrap:hover {
+            transform: translateY(-2px);
         }
 
-        /* Inner Button content masks the spinning center */
-        .rgb-btn-inner {
-            position: relative;
-            z-index: 2;
-            background-color: #0d0d0d;
+        /* Premium Dark Solid Interior Core */
+        .glow-btn-inner {
+            background-color: rgba(8, 9, 13, 0.97);
             color: #ffffff;
-            padding: 16px 24px;
-            border-radius: 9px; /* Slightly lower radius to match parent */
+            padding: 18px 24px;
+            border-radius: 14px; 
             display: flex;
             align-items: center;
-            transition: background-color 0.3s;
+            backdrop-filter: blur(8px);
+            transition: background-color 0.2s;
         }
 
-        .rgb-btn-wrap:hover .rgb-btn-inner {
-            background-color: #151515;
+        .glow-btn-wrap:hover .glow-btn-inner {
+            background-color: rgba(16, 18, 28, 0.97);
         }
 
-        .rgb-btn-inner i {
-            font-size: 1.3rem;
-            width: 30px;
+        .glow-btn-inner i {
+            font-size: 1.35rem;
+            width: 35px;
             text-align: left;
         }
 
-        /* Branding Colors for the Icons */
-        .fa-youtube { color: #ff0000; }
-        .fa-instagram { color: #e1306c; }
-        .fa-facebook { color: #1877f2; }
-        .fa-lightbulb { color: #ff9900; } /* Fallback icon for Instructables */
+        .fa-youtube { color: #ff3344; }
+        .fa-instagram { color: #f00073; }
+        .fa-facebook { color: #2e87ff; }
+        .fa-lightbulb { color: #ffaa00; }
 
         .btn-text {
             flex-grow: 1;
             text-align: center;
-            font-weight: 500;
-            font-spacing: 0.5px;
+            font-weight: 600;
+            font-size: 1.02rem;
+            letter-spacing: 0.3px;
+            color: #f1f5f9;
         }
 
         .fa-chevron-down {
-            font-size: 0.9rem !important;
+            font-size: 0.85rem !important;
             width: auto !important;
-            transition: transform 0.3s ease;
+            transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            color: #64748b;
         }
 
-        /* Dropdown Specific Styles */
+        /* Dropdown Structure and Refinements */
         .dropdown-container {
             width: 100%;
             position: relative;
@@ -146,121 +172,128 @@
         .dropdown-menu {
             max-height: 0;
             overflow: hidden;
-            transition: max-height 0.4s ease-out;
+            transition: max-height 0.4s cubic-bezier(0.4, 0, 0.2, 1), margin-top 0.3s;
             display: flex;
             flex-direction: column;
-            gap: 8px;
-            margin-top: 8px;
-            padding: 0 5px;
+            gap: 10px;
+            margin-top: 0px;
+            padding: 0 2px;
         }
 
         .dropdown-container.active .dropdown-menu {
-            max-height: 300px;
+            max-height: 330px;
+            margin-top: 12px;
             overflow-y: auto;
         }
 
         .dropdown-container.active .fa-chevron-down {
             transform: rotate(180deg);
+            color: #ffffff;
         }
 
+        /* Premium Video Selection Items */
         .video-item {
-            background: #111;
-            border: 1px solid #222;
-            padding: 12px;
-            border-radius: 8px;
-            color: #ccc;
+            background: rgba(12, 14, 22, 0.92);
+            border: 1px solid rgba(255, 255, 255, 0.05);
+            backdrop-filter: blur(10px);
+            padding: 14px 18px;
+            border-radius: 12px;
+            color: #cbd5e1;
             text-decoration: none;
             text-align: left;
-            font-size: 0.9rem;
+            font-size: 0.92rem;
             display: flex;
             flex-direction: column;
-            gap: 4px;
-            transition: all 0.2s;
+            gap: 5px;
+            transition: all 0.2s ease;
         }
 
         .video-item:hover {
-            background: #1c1c1c;
-            color: #fff;
-            border-color: #444;
+            background: rgba(22, 25, 40, 0.96);
+            color: #ffffff;
+            border-color: rgba(255, 255, 255, 0.15);
+            transform: translateX(2px);
         }
 
         .video-date {
             font-size: 0.75rem;
-            color: #666;
+            color: #64748b;
+            font-weight: 500;
         }
 
-        /* Scrollbar styling for the dropdown list */
         .dropdown-menu::-webkit-scrollbar {
-            width: 6px;
+            width: 4px;
         }
         .dropdown-menu::-webkit-scrollbar-track {
-            background: #000;
+            background: transparent;
         }
         .dropdown-menu::-webkit-scrollbar-thumb {
-            background: #333;
-            border-radius: 3px;
+            background: rgba(255, 255, 255, 0.08);
+            border-radius: 10px;
         }
     </style>
 </head>
 <body>
 
+    <!-- Dynamic Canvas Backdrop -->
+    <canvas id="pcb-canvas"></canvas>
+
     <div class="container">
         
-        <!-- Rectangular Logo Section -->
+        <!-- Clean Rounded Corners Logo Display -->
         <div class="logo-container">
-            <img src="https://github.com/ausafmomin/Apocalypse-companion/blob/main/logo1.jpg?raw=true" alt="Logo">
+            <img src="https://github.com/ausafmomin/Apocalypse-companion/blob/main/logo1.jpg?raw=true" alt="Dr. Electronics Logo">
         </div>
 
         <!-- Title Heading -->
         <h1>Dr. Electronics</h1>
 
-        <!-- Buttons Stack -->
+        <!-- Core Interactive Buttons Layout -->
         <div class="links-stack">
 
-            <!-- Button 1: YouTube -->
-            <a href="https://www.youtube.com/@drelectronics13" class="rgb-btn-wrap">
-                <div class="rgb-btn-inner">
+            <!-- Link 1: YouTube -->
+            <a href="https://www.youtube.com/@drelectronics13" target="_blank" class="glow-btn-wrap">
+                <div class="glow-btn-inner">
                     <i class="fab fa-youtube"></i>
                     <span class="btn-text">YouTube</span>
                 </div>
             </a>
 
-            <!-- Button 2: Instagram -->
-            <a href="https://www.instagram.com/dr.ausaf/?hl=en" class="rgb-btn-wrap">
-                <div class="rgb-btn-inner">
+            <!-- Link 2: Instagram -->
+            <a href="https://www.instagram.com/dr.ausaf/?hl=en" target="_blank" class="glow-btn-wrap">
+                <div class="glow-btn-inner">
                     <i class="fab fa-instagram"></i>
                     <span class="btn-text">Instagram</span>
                 </div>
             </a>
 
-            <!-- Button 3: Facebook -->
-            <a href="https://www.facebook.com/ausaf.momin.58="rgb-btn-wrap">
-                <div class="rgb-btn-inner">
+            <!-- Link 3: Facebook -->
+            <a href="https://www.facebook.com/ausaf.momin.58" target="_blank" class="glow-btn-wrap">
+                <div class="glow-btn-inner">
                     <i class="fab fa-facebook"></i>
                     <span class="btn-text">Facebook</span>
                 </div>
             </a>
 
-            <!-- Button 4: Instructables -->
-            <a href="https://www.instructables.com/member/Ausafmom/" class="rgb-btn-wrap">
-                <div class="rgb-btn-inner">
+            <!-- Link 4: Instructables -->
+            <a href="https://www.instructables.com/member/Ausafmom/" target="_blank" class="glow-btn-wrap">
+                <div class="glow-btn-inner">
                     <i class="fas fa-lightbulb"></i>
                     <span class="btn-text">Instructables</span>
                 </div>
             </a>
 
-            <!-- Button 5: Dropdown Menu with Live Feed -->
+            <!-- Link 5: Async Dropdown Video Selector -->
             <div class="dropdown-container" id="yt-dropdown-container">
-                <div class="rgb-btn-wrap" onclick="toggleDropdown()">
-                    <div class="rgb-btn-inner">
+                <div class="glow-btn-wrap" onclick="toggleDropdown()">
+                    <div class="glow-btn-inner">
                         <i class="fab fa-youtube"></i>
                         <span class="btn-text" id="dropdown-label">Latest Videos</span>
                         <i class="fas fa-chevron-down"></i>
                     </div>
                 </div>
                 <div class="dropdown-menu" id="video-list">
-                    <!-- Fetched video elements will append here dynamically -->
-                    <div class="video-item" style="text-align:center;">Loading videos...</div>
+                    <div class="video-item" style="text-align:center;">Loading content stream...</div>
                 </div>
             </div>
 
@@ -268,20 +301,15 @@
     </div>
 
     <script>
-        // Toggle the active state of the drop-down menu
         function toggleDropdown() {
             document.getElementById('yt-dropdown-container').classList.toggle('active');
         }
 
-        // Fetch YouTube videos via public RSS feed converted to JSON
+        // --- YouTube Feed Fetcher ---
         async function fetchLatestVideos() {
-            // REPLACE THIS CHANNEL ID WITH YOUR ACTUAL YOUTUBE CHANNEL ID
             const channelId = 'UCsFAKaIdOes34DyyXr3jNdg'; 
             const rssUrl = `https://www.youtube.com/feeds/videos.xml?channel_id=${channelId}`;
-            
-            // Using a free, reliable open-source feed parser proxy for client-side execution
             const rss2jsonApi = `https://api.rss2json.com/v1/api.json?rss_url=${encodeURIComponent(rssUrl)}`;
-
             const container = document.getElementById('video-list');
 
             try {
@@ -289,19 +317,13 @@
                 const data = await response.json();
 
                 if (data.status === 'ok' && data.items.length > 0) {
-                    container.innerHTML = ''; // Wipe loading message
-
-                    // RSS2JSON naturally returns them sorted by release date descending
+                    container.innerHTML = ''; 
                     data.items.forEach(video => {
                         const videoLink = video.link;
                         const videoTitle = video.title;
-                        
-                        // Human-friendly date formatting
                         const pubDate = new Date(video.pubDate);
                         const formattedDate = pubDate.toLocaleDateString(undefined, { 
-                            year: 'numeric', 
-                            month: 'short', 
-                            day: 'numeric' 
+                            year: 'numeric', month: 'short', day: 'numeric' 
                         });
 
                         const itemHtml = `
@@ -316,13 +338,283 @@
                     container.innerHTML = '<div class="video-item" style="text-align:center;">No videos found.</div>';
                 }
             } catch (error) {
-                console.error('Error fetching YouTube RSS feed:', error);
-                container.innerHTML = '<div class="video-item" style="text-align:center; color:#ff4444;">Failed to load videos.</div>';
+                console.error(error);
+                container.innerHTML = '<div class="video-item" style="text-align:center; color:#ff5566;">Failed to load videos.</div>';
             }
         }
 
-        // Initialize fetching on page load
-        window.onload = fetchLatestVideos;
+        // --- PCB Development Hardware Simulation ---
+        const canvas = document.getElementById('pcb-canvas');
+        const ctx = canvas.getContext('2d');
+
+        let modules = [];
+        let tracks = [];
+        let pulses = [];
+        const maxPulses = 20;
+
+        function resizeCanvas() {
+            canvas.width = window.innerWidth;
+            canvas.height = window.innerHeight;
+            assembleHardwareBoard();
+        }
+
+        function assembleHardwareBoard() {
+            modules = [];
+            tracks = [];
+            pulses = [];
+
+            // Define specific hardware dimensions & placement structures
+            const hardwareSet = [
+                { id: 'esp32', name: 'ESP32 WROOM', x: canvas.width * 0.12, y: canvas.height * 0.18, w: 90, h: 110, color: '#2c3e50', type: 'esp32' },
+                { id: 'arduino', name: 'ARDUINO NANO', x: canvas.width * 0.82, y: canvas.height * 0.22, w: 75, h: 120, color: '#00878f', type: 'nano' },
+                { id: 'oled', name: 'I2C OLED 0.96"', x: canvas.width * 0.15, y: canvas.height * 0.72, w: 90, h: 70, color: '#1c1d22', type: 'oled' },
+                { id: 'sensor', name: 'SENSOR MODULE', x: canvas.width * 0.80, y: canvas.height * 0.76, w: 80, h: 60, color: '#27ae60', type: 'sensor' }
+            ];
+
+            // Only load modules that visually reside inside user viewport bounds
+            modules = hardwareSet.filter(m => m.x > 0 && m.x < canvas.width && m.y > 0 && m.y < canvas.height);
+
+            // Construct exact interconnect tracking buses matching module coordinates
+            const esp = modules.find(m => m.id === 'esp32');
+            const nano = modules.find(m => m.id === 'arduino');
+            const oled = modules.find(m => m.id === 'oled');
+            const sens = modules.find(m => m.id === 'sensor');
+
+            // 1. Bus System: ESP32 to Arduino Nano (Top cross traces)
+            if (esp && nano) {
+                for (let i = 0; i < 4; i++) {
+                    let pinY1 = esp.y + 30 + (i * 18);
+                    let pinY2 = nano.y + 25 + (i * i * 4);
+                    buildInterconnectTrack(esp.x + esp.w, pinY1, nano.x, pinY2, '#00e5ff');
+                }
+            }
+
+            // 2. Bus System: ESP32 to I2C OLED (Vertical structural drop run)
+            if (esp && oled) {
+                for (let i = 0; i < 3; i++) {
+                    let pinX1 = esp.x + 20 + (i * 20);
+                    let pinX2 = oled.x + 20 + (i * 20);
+                    buildInterconnectTrack(pinX1, esp.y + esp.h, pinX2, oled.y, '#00ff66');
+                }
+            }
+
+            // 3. Bus System: Arduino Nano to Sensor Module (Vertical drop down)
+            if (nano && sens) {
+                for (let i = 0; i < 3; i++) {
+                    let pinX1 = nano.x + 15 + (i * 22);
+                    let pinX2 = sens.x + 15 + (i * 22);
+                    buildInterconnectTrack(pinX1, nano.y + nano.h, pinX2, sens.y, '#ffaa00');
+                }
+            }
+
+            // 4. Bus System: Sensor Module to OLED display (Bottom ground bus sync)
+            if (sens && oled) {
+                for (let i = 0; i < 2; i++) {
+                    let pinY1 = sens.y + 20 + (i * 20);
+                    let pinY2 = oled.y + 25 + (i * 20);
+                    buildInterconnectTrack(sens.x, pinY1, oled.x + oled.w, pinY2, '#ff0055');
+                }
+            }
+        }
+
+        function buildInterconnectTrack(x1, y1, x2, y2, color) {
+            let points = [{x: x1, y: y1}];
+            
+            // Generate clean orthopedic 45/90 degree traces based on placement
+            if (Math.abs(x2 - x1) > Math.abs(y2 - y1)) {
+                let midX = x1 + (x2 - x1) * 0.4;
+                points.push({x: midX, y: y1});
+                points.push({x: midX + (y2 - y1), y: y2});
+            } else {
+                let midY = y1 + (y2 - y1) * 0.4;
+                points.push({x: x1, y: midY});
+                points.push({x: x2, y: midY + (x2 - x1)});
+            }
+            
+            points.push({x: x2, y: y2});
+            tracks.push({ points: points, color: color });
+        }
+
+        function manageCircuitSignals() {
+            // Keep electron streams cycling non-stop
+            while (pulses.length < maxPulses && tracks.length > 0) {
+                const randomTrack = tracks[Math.floor(Math.random() * tracks.length)];
+                pulses.push({
+                    track: randomTrack,
+                    segment: 0,
+                    progress: Math.random(), // Uniform distribution trace spawn spacing
+                    speed: 0.008 + Math.random() * 0.012,
+                    history: []
+                });
+            }
+
+            for (let i = pulses.length - 1; i >= 0; i--) {
+                let p = pulses[i];
+                p.progress += p.speed;
+
+                const p1 = p.track.points[p.segment];
+                const p2 = p.track.points[p.segment + 1];
+
+                if (p1 && p2) {
+                    const currentX = p1.x + (p2.x - p1.x) * p.progress;
+                    const currentY = p1.y + (p2.y - p1.y) * p.progress;
+
+                    p.history.push({ x: currentX, y: currentY });
+                    if (p.history.length > 12) p.history.shift();
+                }
+
+                if (p.progress >= 1) {
+                    p.progress = 0;
+                    p.segment++;
+                    
+                    // Disappear cleanly upon hitting target component boundaries, then loop from source pin
+                    if (p.segment >= p.track.points.length - 1) {
+                        p.segment = 0;
+                        p.history = [];
+                        p.progress = 0;
+                    }
+                }
+            }
+        }
+
+        function renderHardwarePCB() {
+            ctx.clearRect(0, 0, canvas.width, canvas.height);
+
+            // 1. Draw Hardware Architecture Modules
+            modules.forEach(m => {
+                // PCB Base Plate
+                ctx.fillStyle = m.color;
+                ctx.strokeStyle = 'rgba(255, 255, 255, 0.08)';
+                ctx.lineWidth = 2;
+                ctx.beginPath();
+                ctx.roundRect(m.x, m.y, m.w, m.h, 6);
+                ctx.fill();
+                ctx.stroke();
+
+                // Component Identification Text Silkscreen
+                ctx.fillStyle = 'rgba(255, 255, 255, 0.25)';
+                ctx.font = 'bold 8px "Plus Jakarta Sans"';
+                ctx.textAlign = 'center';
+                ctx.fillText(m.name, m.x + m.w / 2, m.y + m.h / 2 + 3);
+
+                // Specific Subassembly Render Layout Rules
+                if (m.type === 'esp32') {
+                    // ESP32 Onboard Metallic Shield Core
+                    ctx.fillStyle = '#7f8c8d';
+                    ctx.fillRect(m.x + 20, m.y + 35, 50, 55);
+                    // Onboard Trace Antenna Layout Shape
+                    ctx.fillStyle = '#111';
+                    ctx.fillRect(m.x + 15, m.y + 5, 60, 18);
+                    ctx.strokeStyle = '#d35400';
+                    ctx.lineWidth = 1;
+                    ctx.beginPath();
+                    ctx.moveTo(m.x + 20, m.y + 14);
+                    ctx.lineTo(m.x + 70, m.y + 14);
+                    ctx.stroke();
+                } 
+                else if (m.type === 'nano') {
+                    // ATmega328P Main Processor IC Core
+                    ctx.fillStyle = '#111116';
+                    ctx.fillRect(m.x + 25, m.y + 45, 25, 25);
+                    // Mini USB Port Node
+                    ctx.fillStyle = '#bdc3c7';
+                    ctx.fillRect(m.x + 28, m.y, 20, 12);
+                } 
+                else if (m.type === 'oled') {
+                    // Glass Display Matrix Panel Screen Frame
+                    ctx.fillStyle = '#000000';
+                    ctx.fillRect(m.x + 8, m.y + 18, 74, 44);
+                    ctx.strokeStyle = 'rgba(0, 229, 255, 0.2)';
+                    ctx.strokeRect(m.x + 8, m.y + 18, 74, 44);
+                }
+                else if (m.type === 'sensor') {
+                    // Transducer Sensor Component Ring
+                    ctx.strokeStyle = '#bdc3c7';
+                    ctx.lineWidth = 3;
+                    ctx.beginPath();
+                    ctx.arc(m.x + m.w/2, m.y + 22, 12, 0, Math.PI * 2);
+                    ctx.stroke();
+                }
+
+                // Render Connection Header Pins
+                ctx.fillStyle = '#f1c40f'; // Gold metal plating tone
+                if (m.type === 'esp32' || m.type === 'nano') {
+                    // Dual Inline Side Rows
+                    for(let y = m.y + 15; y < m.y + m.h - 15; y += 14) {
+                        ctx.fillRect(m.x + 2, y, 5, 5);
+                        ctx.fillRect(m.x + m.w - 7, y, 5, 5);
+                    }
+                } else {
+                    // Single Interface Row
+                    for(let x = m.x + 15; x < m.x + m.w - 15; x += 15) {
+                        ctx.fillRect(x, m.y + 2, 5, 5);
+                    }
+                }
+            });
+
+            // 2. Draw Copper Circuit Traces
+            ctx.lineWidth = 1.5;
+            tracks.forEach(t => {
+                ctx.strokeStyle = 'rgba(255, 255, 255, 0.035)';
+                ctx.beginPath();
+                ctx.moveTo(t.points[0].x, t.points[0].y);
+                for (let i = 1; i < t.points.length; i++) {
+                    ctx.lineTo(t.points[i].x, t.points[i].y);
+                }
+                ctx.stroke();
+            });
+
+            // 3. Render Floating Current Electron Pulses
+            pulses.forEach(p => {
+                if (p.history.length < 2) return;
+
+                ctx.lineCap = 'round';
+                ctx.lineJoin = 'round';
+
+                // Tapered tail calculation execution
+                for (let i = 1; i < p.history.length; i++) {
+                    const startNode = p.history[i - 1];
+                    const endNode = p.history[i];
+                    const alpha = i / p.history.length;
+
+                    ctx.strokeStyle = p.track.color;
+                    ctx.lineWidth = 1.0 + (alpha * 2.0);
+                    ctx.globalAlpha = alpha * 0.55;
+
+                    ctx.beginPath();
+                    ctx.moveTo(startNode.x, startNode.y);
+                    ctx.lineTo(endNode.x, endNode.y);
+                    ctx.stroke();
+                }
+                ctx.globalAlpha = 1.0;
+
+                // Bright Hot Spark Core Lead Point
+                const head = p.history[p.history.length - 1];
+                if (head) {
+                    ctx.shadowBlur = 12;
+                    ctx.shadowColor = p.track.color;
+                    ctx.fillStyle = '#ffffff';
+                    ctx.beginPath();
+                    ctx.arc(head.x, head.y, 2.5, 0, Math.PI * 2);
+                    ctx.fill();
+                    ctx.shadowBlur = 0;
+                }
+            });
+        }
+
+        function runAnimationLoop() {
+            manageCircuitSignals();
+            renderHardwarePCB();
+            requestAnimationFrame(runAnimationLoop);
+        }
+
+        window.addEventListener('resize', resizeCanvas);
+        
+        window.onload = function() {
+            fetchLatestVideos();
+            resizeCanvas();
+            runAnimationLoop();
+        };
     </script>
 </body>
 </html>
