@@ -3,53 +3,300 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>My Tutorials & Socials</title>
-    <link rel="stylesheet" href="style.css">
+    <title>My Linktree | Connect & Explore</title>
+    <style>
+        /* Modern Reset & Base Styling */
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+
+        body {
+            background: #0a0a0c;
+            color: #ffffff;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: flex-start;
+            min-height: 100vh;
+            padding: 3rem 1.5rem;
+            overflow-x: hidden;
+            position: relative;
+        }
+
+        /* Subtle Ambient Background Glows */
+        body::before, body::after {
+            content: '';
+            position: absolute;
+            width: 300px;
+            height: 300px;
+            border-radius: 50%;
+            background: linear-gradient(45deg, #ff007f, #7f00ff);
+            filter: blur(120px);
+            opacity: 0.15;
+            z-index: -1;
+        }
+        body::before { top: 10%; left: 10%; }
+        body::after { bottom: 10%; right: 10%; }
+
+        /* Container */
+        .container {
+            width: 100%;
+            max-width: 500px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 1.5rem;
+        }
+
+        /* Profile Section */
+        .profile {
+            text-align: center;
+            margin-bottom: 1rem;
+        }
+
+        .avatar {
+            width: 96px;
+            height: 96px;
+            border-radius: 50%;
+            background: linear-gradient(45deg, #00f2fe, #4facfe);
+            padding: 3px;
+            box-shadow: 0 8px 24px rgba(0,0,0,0.5);
+            margin-bottom: 1rem;
+        }
+
+        .avatar img {
+            width: 100%;
+            height: 100%;
+            border-radius: 50%;
+            object-fit: cover;
+            background: #121214;
+        }
+
+        .username {
+            font-size: 1.5rem;
+            font-weight: 700;
+            letter-spacing: -0.5px;
+            margin-bottom: 0.25rem;
+            background: linear-gradient(to right, #fff, #a1a1aa);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .bio {
+            font-size: 0.9rem;
+            color: #8e8e93;
+        }
+
+        /* RGB Flowing Border Button Wrapper */
+        .rgb-link {
+            position: relative;
+            width: 100%;
+            border-radius: 12px;
+            padding: 2px; /* Sets border thickness */
+            background: linear-gradient(90deg, #ff007f, #7f00ff, #00f2fe, #ff007f);
+            background-size: 300% 100%;
+            animation: flowRGB 4s linear infinite;
+            text-decoration: none;
+            display: block;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.4);
+            transition: transform 0.2s ease, box-shadow 0.2s ease;
+        }
+
+        @keyframes flowRGB {
+            0% { background-position: 0% 50%; }
+            100% { background-position: 300% 50%; }
+        }
+
+        /* Inside Button Content */
+        .btn-content {
+            background: #141417;
+            padding: 1rem 1.5rem;
+            border-radius: 10px; /* Slightly less than wrapper to fit perfectly */
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 0.75rem;
+            color: #ffffff;
+            font-weight: 600;
+            font-size: 1rem;
+            transition: background 0.2s ease;
+        }
+
+        /* Hover Interaction Effects */
+        .rgb-link:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 28px rgba(127, 0, 255, 0.3);
+        }
+
+        .rgb-link:hover .btn-content {
+            background: #1c1c21;
+        }
+
+        /* Custom Colors/Icons hints for Specific Platforms (Optional Enhancement) */
+        .youtube-btn { --glow-color: #ff0000; }
+        .instagram-btn { --glow-color: #e1306c; }
+        .facebook-btn { --glow-color: #1877f2; }
+        .instructables-btn { --glow-color: #ffc107; }
+
+        /* Dropdown Accordion Section */
+        .dropdown-container {
+            width: 100%;
+            background: #141417;
+            border: 1px solid #27272a;
+            border-radius: 12px;
+            overflow: hidden;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.2);
+        }
+
+        .dropdown-trigger {
+            width: 100%;
+            padding: 1rem 1.5rem;
+            background: none;
+            border: none;
+            color: #ffffff;
+            font-weight: 600;
+            font-size: 1rem;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            cursor: pointer;
+            transition: background 0.2s;
+        }
+
+        .dropdown-trigger:hover {
+            background: #1c1c21;
+        }
+
+        .dropdown-icon {
+            transition: transform 0.3s ease;
+        }
+
+        /* Video List Panel */
+        .dropdown-panel {
+            max-height: 0;
+            overflow: hidden;
+            transition: max-height 0.3s ease-out;
+            background: #0d0d0f;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .video-item {
+            padding: 0.85rem 1.5rem;
+            border-top: 1px solid #1c1c21;
+            color: #d4d4d8;
+            text-decoration: none;
+            font-size: 0.9rem;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            transition: background 0.2s, color 0.2s;
+        }
+
+        .video-item:hover {
+            background: #141417;
+            color: #00f2fe;
+        }
+
+        .video-meta {
+            font-size: 0.75rem;
+            color: #71717a;
+            background: #1c1c21;
+            padding: 2px 6px;
+            border-radius: 4px;
+        }
+
+        /* Active/Open State classes handled by JS */
+        .dropdown-container.is-open .dropdown-icon {
+            transform: rotate(180deg);
+        }
+    </style>
 </head>
 <body>
 
-    <!-- Outer wrapper that creates the flowing RGB border -->
-    <div class="rgb-border-box">
-        <div class="container">
-            <!-- Profile Header -->
-            <div class="profile">
-                <!-- Rectangular image layout -->
-                <img src="https://github.com/ausafmomin/Apocalypse-companion/blob/main/logo1.jpg?raw=true" alt="Profile Picture" class="avatar-rect">
-                <h1>My Video Tutorials</h1>
-                <p>Explore my latest electronics builds, software guides, and social content.</p>
+    <div class="container">
+       
+        <!-- Profile header -->
+        <div class="profile">
+            <div class="avatar">
+                <!-- Replace with your own profile image link -->
+                <img src="https://via.placeholder.com/150" alt="Profile Avatar">
             </div>
+            <h1 class="username">@YourName</h1>
+            <p class="bio">Creator • Maker • Developer</p>
+        </div>
 
-            <!-- Links Section -->
-            <div class="links-container">
-                
-                <!-- YouTube Link -->
-                <a href="https://www.youtube.com/@drelectronics13" target="_blank" class="link-btn youtube-btn">
-                    <span>🎥</span> YouTube Channel
+        <!-- Social Links with RGB Flowing Borders -->
+        <a href="https://youtube.com" target="_blank" class="rgb-link youtube-btn">
+            <div class="btn-content">
+                <span>YouTube Channel</span>
+            </div>
+        </a>
+
+        <a href="https://instagram.com" target="_blank" class="rgb-link instagram-btn">
+            <div class="btn-content">
+                <span>Instagram</span>
+            </div>
+        </a>
+
+        <a href="https://facebook.com" target="_blank" class="rgb-link facebook-btn">
+            <div class="btn-content">
+                <span>Facebook</span>
+            </div>
+        </a>
+
+        <a href="https://instructables.com" target="_blank" class="rgb-link instructables-btn">
+            <div class="btn-content">
+                <span>Instructables Profile</span>
+            </div>
+        </a>
+
+        <!-- Dynamic Chronological YouTube Dropdown Component -->
+        <div class="dropdown-container">
+            <button class="dropdown-trigger" onclick="toggleDropdown()">
+                <span>YouTube Video Archive</span>
+                <span class="dropdown-icon">▼</span>
+            </button>
+            <div id="videoPanel" class="dropdown-panel">
+                <!-- Video items structured in descending release sequence (latest first) -->
+                <a href="YOUR_VIDEO_URL_1" target="_blank" class="video-item">
+                    <span>1. Title of Your Most Recent Video</span>
+                    <span class="video-meta">Latest</span>
                 </a>
-
-                <!-- Instagram Link -->
-                <a href="https://www.instagram.com/dr.ausaf/?hl=en" target="_blank" class="link-btn instagram-btn">
-                    <span>📸</span> Instagram Profile
+                <a href="YOUR_VIDEO_URL_2" target="_blank" class="video-item">
+                    <span>2. Title of Your Second Video</span>
+                    <span class="video-meta">Video #2</span>
                 </a>
-
-                <!-- Instructables Link -->
-                <a href="https://www.instructables.com/member/Ausafmom/" target="_blank" class="link-btn instructables-btn">
-                    <span>🛠️</span> Instructables Guides
+                <a href="YOUR_VIDEO_URL_3" target="_blank" class="video-item">
+                    <span>3. Title of Your Third Video</span>
+                    <span class="video-meta">Video #3</span>
                 </a>
-
-                <!-- Video Tutorial 1 -->
-                <a href="https://youtu.be/Zf_uiDE4K_s?si=OoTQYs76WKLWcGt8" target="_blank" class="link-btn video-btn">
-                    <span>🚀</span> Latest DIY Apocalypse Companion Tutorial
+                <a href="YOUR_VIDEO_URL_4" target="_blank" class="video-item">
+                    <span>4. Title of Your Oldest Video</span>
+                    <span class="video-meta">Video #4</span>
                 </a>
-
-                <!-- Video Tutorial 2 -->
-                <a href="https://youtu.be/f9H4PGlwTKk?si=4kB_-A1zBat4MRKJ" target="_blank" class="link-btn video-btn">
-                    <span>💡</span> DIY Smart RGB Alarm Clock
-                </a>
-
             </div>
         </div>
+
     </div>
 
+    <script>
+        function toggleDropdown() {
+            const container = document.querySelector('.dropdown-container');
+            const panel = document.getElementById('videoPanel');
+           
+            if (container.classList.contains('is-open')) {
+                container.classList.remove('is-open');
+                panel.style.maxHeight = null;
+            } else {
+                container.classList.add('is-open');
+                // Sets precise maximum height dynamically to smoothly slide open
+                panel.style.maxHeight = panel.scrollHeight + "px";
+            }
+        }
+    </script>
 </body>
 </html>
